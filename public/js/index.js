@@ -27,3 +27,7 @@ socket.on('newMessage', function (message) {
 socket.on('newEmail',function (email) {
     console.log('new email ',email);   
 });
+
+socket.on('newUserConnected',function(message) {
+    console.log('new User Message : ',message);
+});

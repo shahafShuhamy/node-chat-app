@@ -15,20 +15,29 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) =>{
     console.log('new user connected');
     //fires a custom event to Client
-    // socket.emit('newMessage',{
-    //     from:'remote User',
-    //     text:"hi there i'm remote user",
-    //     createdAt:'09/08/2018'
-    // });
+   socket.emit('newUserConnected',{
+        from: 'Admin',
+        text: 'Welcome new User',
+   });
+
+   socket.broadcast.emit('newMessage',{
+        from: 'Admin',
+        text: 'new user joined chat room',
+        createdAt: new Date().getTime()
+   });
 
     //listenning to a custom event from client
     socket.on('createMessage', (message) =>{
         console.log('create message',message);
-        io.emit('newMessage',{
-            from: message.from,
-            text: message.text,
-            createdAt: new Date().getTime()
-        });
+        // io.emit('newMessage',{
+        //     from: message.from,
+        //     text: message.text,
+        //     createdAt: new Date().getTime()
+        // });
+        // socket.broadcast.emit('newMessage',{
+        //         from: message.from,
+        //         text: message.text,
+        //         createdAt: new Date().getTime()})
     });
 
     socket.on('disconnect',() =>{
