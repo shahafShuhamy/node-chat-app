@@ -20,8 +20,9 @@ socket.on('disconnect', function ()  {
 });
 
 socket.on('newMessage', function (message) {
+    var formatedTime = moment(message.createdAt).format('h:mm a');
     var li = jQuery('<li></li>');
-    li.text(`${message.from}: ${message.text}`);
+    li.text(`${message.from} ${formatedTime} : ${message.text}`);
     jQuery('#messages').append(li);
     console.log(message);
 });
@@ -37,17 +38,18 @@ socket.on('newUserConnected',function(message) {
 
 
 //emit (eventName, DataToSend, CallBackFunction)
-socket.emit('createMessage',{
-    from:'client',
-    text:'hello from Client'
-},function (returndDate){
-    console.log('got message : ',returndDate);
-});
+// socket.emit('createMessage',{
+//     from:'client',
+//     text:'hello from Client'
+// },function (returndDate){
+//     console.log('got message : ',returndDate);
+// });
 
 socket.on('newLocationMessage',function(message){
     var li = jQuery('<li></li>');
     var a = jQuery('<a target="_blank">My Current location</a>');
-    li.text(`${message.from}: `);
+    var time = moment(message.createdAt).format('h:mm a');
+    li.text(`${message.from} ${time}: `);
     a.attr('href',message.url);
     li.append(a);
     jQuery('#messages').append(li);

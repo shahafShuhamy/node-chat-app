@@ -16,7 +16,7 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) =>{
     console.log('new user connected');
     //fires a custom event to Client
-   socket.emit('newUserConnected',generateMessage('Admin','Welcome new User'));
+   socket.emit('newMessage',generateMessage('Admin','Welcome new User'));
    socket.broadcast.emit('newMessage',generateMessage('Admin','new user joined chat room'));
 
     //listenning to a custom event from client
