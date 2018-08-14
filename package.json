@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "test": "mocha server/**/*.test.js",
-    "test-watch": "modemon --exec 'npm test'"
+    "test-watch": "modemon --exec 'npm test'",
+    "test-debug" :"mocha --inspect"
   },
   "engines": {
     "node": "8.11.3"
